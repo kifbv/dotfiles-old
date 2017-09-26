@@ -1,0 +1,17 @@
+! Settings
+URxvt.foreground: green
+URxvt.background: black
+URxvt.scrollBar: false
+
+! Fonts
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.hintstyle: hintfull
+Xft.dpi: 165
+
+URxvt.font: xft:monaco:size=8
+URxvt.cursorBlink: true
+
+! Change font size on the fly
+URxvt.perl-ext-common:  resize-font
