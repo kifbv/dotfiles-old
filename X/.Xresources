@@ -13,5 +13,5 @@ Xft.dpi: 165
 URxvt.font: xft:monaco:size=8
 URxvt.cursorBlink: true
 
-! Change font size on the fly
-URxvt.perl-ext-common:  resize-font
+! Change font size on the fly, tabs
+URxvt.perl-ext-common:  resize-font,tabbed
