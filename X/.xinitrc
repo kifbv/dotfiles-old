@@ -1,29 +1,19 @@
 #!/bin/sh
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
 
-# need to check this below...
-## merge in defaults and keymaps
-#
-#if [ -f $sysresources ]; then
-#    xrdb -merge $sysresources
-#fi
-#
-#if [ -f $sysmodmap ]; then
-#    xmodmap $sysmodmap
-#fi
-#
-#if [ -f "$userresources" ]; then
-#    xrdb -merge "$userresources"
-#    #[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources 
-#fi
-#
-#if [ -f "$usermodmap" ]; then
-#    xmodmap "$usermodmap"
-#fi
+# merge in defaults and keymaps
+
+[[ -f $sysresources ]] && xrdb -merge $sysresources
+
+[[ -f $sysmodmap ]] && xmodmap $sysmodmap
+
+[[ -f "$userresources" ]] && xrdb -merge -I$HOME "$userresources"
+
+[[ -f "$usermodmap" ]] && xmodmap "$usermodmap"
 
 # start some nice programs
 
