@@ -121,7 +121,7 @@ alias ssh="gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 #
 
 # Autocompletion functions
-source ~/dotfiles/.functions/pass.bash-completion
+source ~/.autocompletion_functions/pass.bash-completion
 source /usr/share/nvm/init-nvm.sh
 # RVM
 [[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
