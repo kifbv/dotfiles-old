@@ -44,4 +44,5 @@ done
 # Start X at login
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
+  # or just startx to avoid being logged out when closing the X server
 fi

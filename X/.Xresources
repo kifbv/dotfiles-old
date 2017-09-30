@@ -16,7 +16,7 @@ Xft.hintstyle: hintfull
 Xft.dpi: 165
 
 ! Change font size on the fly, tabs
-URxvt.perl-ext-common:  resize-font,tabbed,url-select
+URxvt.perl-ext-common:  resize-font,url-select
 
 ! Settings for url-select
 URxvt.keysym.M-u: perl:url-select:select_next

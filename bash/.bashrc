@@ -88,10 +88,12 @@ if ! shopt -oq posix; then
 		. /etc/bash_completion
 	fi
 fi
-for file in /etc/bash_completion.d/* ; do
-	# shellcheck source=/dev/null
-	source "$file"
-done
+if [[ -d /etc/bash_completion.d ]]; then
+	for file in /etc/bash_completion.d/* ; do
+		# shellcheck source=/dev/null
+		source "$file"
+	done
+fi
 
 if [[ -f "${HOME}/.bash_profile" ]]; then
 	# shellcheck source=/dev/null

@@ -4,6 +4,7 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
+def-browser=vivaldi-stable.desktop
 
 # merge in defaults and keymaps
 
@@ -27,6 +28,10 @@ fi
 # change touchpad behaviour
 xinput set-prop 'DLL075B:01 06CB:76AF Touchpad' 'libinput Tapping Enabled' 1
 xinput set-prop 'DLL075B:01 06CB:76AF Touchpad' 'libinput Natural Scrolling Enabled' 1
+
+# set prefered web browser
+[[ $(xdg-settings check default-web-browser $def-browser) = "yes" ]] || \
+xdg-settings set default-web-browser $def-browser
 
 # finally, start i3 window manager
 exec i3
