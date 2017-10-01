@@ -33,13 +33,6 @@ export GO15VENDOREXPERIMENT=1
 
 export DOCKER_CONTENT_TRUST=1
 
-# Golang stuff
-export GOPATH="$HOME/go"
-export PATH="$PATH:$HOME/go/bin"
-
-# ElasticBeanstalk path
-export PATH="$PATH:$HOME/.local/bin"
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 # https://github.com/rvm/rubygems-bundler

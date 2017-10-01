@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Golang stuff
+export GOPATH="$HOME/go"
+export PATH="$PATH:$HOME/go/bin"
+
+# ElasticBeanstalk path
+export PATH="$PATH:$HOME/.local/bin"
+

@@ -120,11 +120,11 @@ alias ssh="gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 # old
 #
 
-# Autocompletion functions
-source ~/.autocompletion_functions/pass.bash-completion
-source /usr/share/nvm/init-nvm.sh
-# RVM
-[[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
+## Autocompletion functions
+#source ~/.autocompletion_functions/pass.bash-completion
+#source /usr/share/nvm/init-nvm.sh
+## RVM
+#[[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
 
 # Only load Liquid Prompt in interactive shells, not from a script or from scp
 [[ $- = *i* ]] && source $HOME/github/nojhan/liquidprompt/liquidprompt
