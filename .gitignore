@@ -1,0 +1,7 @@
+# See here for an (related) interesting rule:
+# https://stackoverflow.com/questions/987142/make-gitignore-ignore-everything-except-a-few-files
+
+# Ignore everything in the gnupg directory
+gnupg/
+# But not these files...
+!gnupg/.gnupg/gpg*.conf
