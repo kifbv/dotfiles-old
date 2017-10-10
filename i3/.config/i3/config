@@ -26,7 +26,7 @@ set $WS10 extra4
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:Monaco 6
-#font pango:DejaVu Sans Mono 8
+#try also Inconsolata or DejaVu
 
 #### i3 SESSION CONTROL
 # reload the configuration file
@@ -113,6 +113,10 @@ bindsym $mod+0 workspace $WS10
 # switch to next/previous workspace
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
+
+# move between workspaces by name
+bindsym $mod+i exec i3-msg workspace $(i3-msg -t get_workspaces | jq -r ".[].name" | dmenu)
+bindsym $mod+Shift+i  exec i3-msg move container to workspace $(i3-msg -t get_workspaces | jq -r ".[].name" | dmenu)
 
 # rename workspace
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -218,4 +222,21 @@ bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec sudo light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec sudo light -U 5 # decrease screen brightness
+# XF86AudioPlay
+# XF86AudioPrev
+# XF86AudioNext
 
+# SCANCODES
+# mute toggle e020e0a0
+# volume down e02ee0ae
+# volume upe 030e0b0
+# previous
+# play
+# next
+# -
+# screen?
+# search
+# keyboard leds toggle
+# brightness down
+# brighton up
+# wifi toggle
