@@ -1,24 +1,39 @@
-! Settings
-URxvt.foreground: green
-URxvt.background: black
-URxvt.scrollBar: false
-URxvt.saveLines: 10000
+! Main Settings
+URxvt.background:      #0e0e0e
+URxvt.foreground:      #4ad5e1
+URxvt.cursorColor:     #dc74d1
+URxvt.pointerColor:    #dc74d1
+URxvt.cursorBlink:     true
 URxvt.cursorUnderline: true
-URxvt.cursorBlink: true
-URxvt.pointerBlank: true
+URxvt.underlineColor:  yellow
+URxvt.pointerBlank:    true
+URxvt.saveLines:       8192
+URxvt.scrollBar:       false
+
+! Global Font Settings
+Xft.antialias: true
+Xft.autohint:  false
+Xft.dpi:       168
+Xft.hinting:   true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba:      rgb
 
 ! Fonts
-URxvt.font: xft:monaco:size=8
-Xft.antialias: true
-Xft.hinting: true
-Xft.rgba: rgb
-Xft.hintstyle: hintfull
-Xft.dpi: 165
+! See which font is in use with fc-match --verbose (check)
+URxvt.font:           xft:Monaco:size=8, \
+                      xft:Inconsolata:pixelsize=27,style=Medium, xft:Symbola:pixelsize=19,style=Regular, \
+		      xft:DejaVu Sans
+URxvt.boldFont:       xft:Inconsolata:style=Bold,pixelsize=27, xft:Symbola:pixelsize=19,style=Regular, \
+	              -xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-15
+URxvt.italicFont:     xft:Bitstream Vera Sans Mono:italic:autohint=true
+URxvt.boldItalicFont: xft:Bitstream Vera Sans Mono:bold:italic:autohint=true
 
-! Change font size on the fly, tabs
-URxvt.perl-ext-common:  resize-font,url-select
+! Change font size on the fly (mod+'+', mod+'-'), open urls in default browser
+! (mod+u)
+URxvt.perl-ext-common: resize-font,url-select
 
 ! Settings for url-select
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.url-select.launcher:  /usr/bin/xdg-open
 URxvt.url-select.underline: true
