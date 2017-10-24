@@ -1,7 +1,3 @@
-# i3 config file (v4)
-#
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
 # USE i3-msg [reload|restart] AFTER MODIFYING THIS FILE TO AVOID RESTARTING X
 # (see reload and restart bindings)
 
@@ -11,7 +7,7 @@ set $mod Mod1
 
 # set some variables
 set $WS1 web
-set $WS2 urxvt
+set $WS2 term
 set $WS3 mail
 set $WS4 music
 set $WS5 code
@@ -23,8 +19,6 @@ set $WS10 extra4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:Monaco 6
 #try also Inconsolata or DejaVu
 
@@ -139,6 +133,12 @@ bindsym $mod+Shift+8 move container to workspace $WS8
 bindsym $mod+Shift+9 move container to workspace $WS9
 bindsym $mod+Shift+0 move container to workspace $WS10
 
+# Put this window on the HDMI output.
+bindsym $mod+y move container to output DP1
+
+# Put this window on the main output.
+bindsym $mod+Shift+y move container to output eDP1
+
 # Automatic back-and-forth between windows
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
@@ -172,15 +172,22 @@ mode "resize" {
 
 # WINDOW ASSIGNMENTS
 # browser
-assign [class="^Vivaldi-stable$"] $WS1
+assign [class="^Vivaldi-stable$"] → $WS1
 # terminal
-assign [class="^URxvt$"] $WS2
+assign [class="^URxvt$" instance="^urxvt$"] → $WS2
+# mail
+assign [class="^URxvt$" instance="^neomutt$"] → $WS3
+# open youtube videos in the same workspace as mps-youtube
+for_window [class="^mpv$" instance="^gl$"] floating enable, move container to workspace music, focus parent
 
 ##### STARTUP APPS
 # browser
 exec vivaldi-stable
 # terminal
 exec --no-startup-id urxvt
+# mail
+# (start a terminal for mutt)
+exec --no-startup-id urxvt -name neomutt
 # mps-youtube
 #exec --no-startup-id i3-msg "workspace $WS4; exec mpyst; workspace $WS1"
 
@@ -202,7 +209,10 @@ bindsym $mod+g exec --no-startup-id scrot -e 'mv $f ~/screenshots/'
 # lock the screen (or use slock)
 bindsym --release $mod+Shift+s exec i3lock -u -i $SCREEN_SAVER_PNG/home/franck/Downloads/07895117-photo-windowsxp.png -p win -e
 
-# Correct handling of floating dialogs
+# open pass dialog box in floating window
+for_window [class="Pinentry"] floating enable
+# open images in floating window
+for_window [class="^feh$"] floating enable
 #for_window [window_role="pop-up"] floating enable
 #for_window [window_role="bubble"] floating enable
 #for_window [window_role="task_dialog"] floating enable
@@ -210,33 +220,19 @@ bindsym --release $mod+Shift+s exec i3lock -u -i $SCREEN_SAVER_PNG/home/franck/D
 #for_window [window_type="dialog"] floating enable
 #for_window [window_type="menu"] floating enable
 #for_window [window_type="About"] floating enable
-for_window [class="Pinentry"] floating enable
 
 ##### EXTRA KEYS BINDINGS
 # volume
-bindsym XF86AudioRaiseVolume exec amixer set Master 5+ #increase sound volume
-bindsym XF86AudioLowerVolume exec amixer set Master 5- #decrease sound volume
-bindsym XF86AudioMute exec amixer set Master 1+ toggle # mute sound
-bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
+bindsym XF86AudioRaiseVolume exec amixer set Master 5+     # increase sound volume
+bindsym XF86AudioLowerVolume exec amixer set Master 5-     # decrease sound volume
+bindsym XF86AudioMute        exec amixer set Master toggle # mute sound
+#bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
 
 # screen brightness controls
-bindsym XF86MonBrightnessUp exec sudo light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo light -U 5 # decrease screen brightness
-# XF86AudioPlay
-# XF86AudioPrev
-# XF86AudioNext
+bindsym XF86MonBrightnessUp   exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
-# SCANCODES
-# mute toggle e020e0a0
-# volume down e02ee0ae
-# volume upe 030e0b0
-# previous
-# play
-# next
-# -
-# screen?
-# search
-# keyboard leds toggle
-# brightness down
-# brighton up
-# wifi toggle
+# mps-youtube bindings
+bindsym XF86AudioPlay exec "playerctl play-pause"
+bindsym XF86AudioNext exec "playerctl next"
+bindsym XF86AudioPrev exec "playerctl previous"

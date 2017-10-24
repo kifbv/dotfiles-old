@@ -1,24 +1,60 @@
-#source "gpg -dq $HOME/.pwd.gpg |"
+set editor        = vim
+set ssl_force_tls = yes
+set mbox_type     = Maildir
+set mail_check    = 30
+set timeout       = 30
+
+# COLORS ----------------------------------------
+#source ~/.config/mutt/neomutt.theme.old
+source ~/.config/mutt/neomutt.theme
+
+# IMAP ------------------------------------------
+# Get password from pass
 source "pass gmail/mutt |"
-set folder=imaps://ratier.franck@imap.gmail.com/
-set imap_user=ratier.franck@gmail.com
-set imap_pass=$my_pass
-set spoolfile=+INBOX
-mailboxes =INBOX
+set imap_pass = $my_pass
+set imap_user = ratier.franck@gmail.com
 
-set editor=vim
+# Specifies the default location of our mailboxes. A “+” or “=” at the
+# beginning of a pathname will be expanded to the value of this variable.
+set folder = imaps://ratier.franck@imap.gmail.com/
 
-# Store message headers locally to speed things up.
-# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more.
+# Gmail's inbox is $folder/Inbox
+set spoolfile = +Inbox
+
+# This specifies the folder into which read  mail  in  the  $spoolfile folder
+# will be appended.
+set mbox = +Inbox
+set move = no
+
+# Specify where to save and/or look for postponed messages.  Save draft
+# messages on the server if you want your drafts to show when you open Gmail on
+# the web.
+set postponed = +[Gmail]/Drafts
+
+# Mailboxes to show in the sidebar.  Names are relative to $folder and using
+# the special gmail pseudo-folders (labels).  These names vary according to the
+# user language (chdir to imaps://<user_account>/[Gmail]) to list them.
+mailboxes +Inbox +[Gmail]/Drafts +[Gmail]/Sent +[Gmail]/Bin '+[Gmail]/All Mail'
+
+# This variable specifies which files to consult when attempting to display
+# MIME bodies not directly supported by NeoMutt.
+set mailcap_path = /home/franck/.config/mutt/mailcap
+
+# Do not copy sent mail. Gmail smtp already does this.  Don't save sent
+# messages on the server. Sent messages are automatically copied to the
+# Gmail/Sent folder if your email client uses SMTP.
+set copy = no
+unset record
+
+# Store message headers locally to speed things up.  If hcache is a folder,
+# Mutt will create sub cache folders for each account which may speeds things
+# up even more.
 set header_cache = ~/.cache/mutt
 
 # Store messages locally to speed things up, like searching message bodies.
-# Can be the same folder as header_cache.
-# This will cost important disk usage according to your e-mail amount.
+# Can be the same folder as header_cache.  This will cost important disk usage
+# according to our e-mail amount.
 set message_cachedir = "~/.cache/mutt"
-
-# Specify where to save and/or look for postponed messages.
-set postponed = +[Gmail]/Drafts
 
 # Allow Mutt to open new imap connection automatically.
 unset imap_passive
@@ -26,57 +62,37 @@ unset imap_passive
 # Keep IMAP connection alive by polling intermittently (time in seconds).
 set imap_keepalive = 300
 
-# How often to check for new mail (time in seconds).
-set mail_check = 120
+# SMTP -------------------------------------------
+set from     = "Franck Ratier <ratier.franck@gmail.com>"
+set smtp_url = smtps://$imap_user:$imap_pass@smtp.gmail.com
 
-# Gmail saves automatically sent e-mail to +[Gmail]/Sent, so we do not want duplicates.
-unset record
-
-# SMTP
-set realname = 'Franck Ratier'
-set from = ratier.franck@gmail.com
-set use_from = yes
-set smtp_url=smtps://$imap_user:$imap_pass@smtp.gmail.com
-set ssl_force_tls = yes
-
-# Basic Options --------------------------------------
+# Steve Losh -------------------------------------
 set wait_key = no        # shut up, mutt
-set mbox_type = Maildir  # mailbox type
-set timeout = 3          # idle time before scanning
-set mail_check = 0       # minimum time between scans
-unset move               # gmail does that
 set delete               # don't ask, just do
 unset confirmappend      # don't ask, just do!
-set quit                 # don't ask, just do!!
 unset mark_old           # read/new is good enough for me
-set beep_new             # bell on new mails
 set pipe_decode          # strip headers and eval mimes when piping
 set thorough_search      # strip headers and eval mimes before searching
 
-# Sidebar Patch --------------------------------------
-set sidebar_divider_char  = '  │'
-set sidebar_visible = yes
-set sidebar_width   = 50
-#color sidebar_indicator default color17
-#color sidebar_highlight white   color238
-#color sidebar_spoolfile yellow  default
-#color sidebar_new       green   default
-#color sidebar_ordinary  default default
-#color sidebar_flagged   red     default
-#color sidebar_divider   color8  default
+# Sidebar Patch ----------------------------------
+set sidebar_visible      = no # start in inbox, no sidebar
+set sidebar_divider_char = '  │'
+set sidebar_width        = 24
+set sidebar_format       = "%B%?F? [%F]?%* "
+set sidebar_short_path   = yes # remove '[Gmail]/' from names
 
-# Status Bar -----------------------------------------
+# Status Bar -------------------------------------
 set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
-# Header Options -------------------------------------
+# Header Options ---------------------------------
 ignore *                                # ignore all headers
 unignore from: to: cc: date: subject:   # show only these
 unhdr_order *                           # some distros order things by default
 hdr_order from: to: cc: date: subject:  # and in this order
 
 # Threads
-set sort = threads                         # like gmail
+set sort     = threads                     # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
 set sort_re                                # thread based on regex
@@ -87,6 +103,7 @@ bind pager j next-line
 bind pager k previous-line
 bind pager g top
 bind pager G bottom
+bind pager R group-reply
 
 bind attach,index,pager \CD next-page
 bind attach,index,pager \CU previous-page
@@ -97,14 +114,28 @@ bind index R        group-reply
 bind index <tab>    sync-mailbox
 bind index <space>  collapse-thread
 
-# Sidebar Navigation ---------------------------------
+# Message management macros & bindings
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index,pager D "<save-message>+[Gmail]/Bin<enter>" "move message to the trash"
+
+bind  index,pager s  flag-message              # Star a message
+bind  index,pager \# delete-thread             # Archive
+bind  index,pager A  delete-thread             # Archive
+bind  index,pager l  copy-message              # Label
+bind  generic     x  tag-entry                 # Select Conversation
+bind  index       x  tag-thread                # Select Conversation
+bind  pager       x  tag-message               # Select Conversation
+
+# Sidebar Navigation -----------------------------
 bind index,pager <down>   sidebar-next
 bind index,pager <up>     sidebar-prev
 bind index,pager <right>  sidebar-open
+bind index,pager S        sidebar-toggle-visible
 
-# Pager View Options ---------------------------------
+# Pager View Options -----------------------------
 set pager_index_lines = 10 # number of index lines to show
-set pager_context = 3      # number of context lines to show
+set pager_context     = 3  # number of context lines to show
 set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
 set tilde                  # show tildes like in vim
@@ -113,12 +144,13 @@ unset markers              # no ugly plus signs
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/enriched text/html
 
-# Pager Key Bindings ---------------------------------
-bind pager k  previous-line
-bind pager j  next-line
-bind pager gg top
-bind pager G  bottom
-bind pager R  group-reply
-
-# View attachments properly.
+# View attachments properly (see ./mailcap and xdg-utils).
+# Convert html emails and display them.
 bind attach <return> view-mailcap
+auto_view text/html
+
+# GooBook contact management
+# (requires goobook-git; goobook authenticate (or just copy ~/.goobook_auth.json ?))
+set query_command="goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+bind editor <Tab> complete-query

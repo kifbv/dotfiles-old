@@ -1,3 +1,4 @@
+! reload .Xresrources settings with xrdb ~/.Xresources
 ! Main Settings
 URxvt.background:      #0e0e0e
 URxvt.foreground:      #4ad5e1
@@ -20,17 +21,18 @@ Xft.lcdfilter: lcddefault
 Xft.rgba:      rgb
 
 ! Fonts
-! See which font is in use with fc-match --verbose (check)
-URxvt.font:           xft:Monaco:size=8, \
-                      xft:Inconsolata:pixelsize=27,style=Medium, xft:Symbola:pixelsize=19,style=Regular, \
-		      xft:DejaVu Sans
-URxvt.boldFont:       xft:Inconsolata:style=Bold,pixelsize=27, xft:Symbola:pixelsize=19,style=Regular, \
-	              -xos4-terminus-bold-r-normal--14-140-72-72-c-80-iso8859-15
-URxvt.italicFont:     xft:Bitstream Vera Sans Mono:italic:autohint=true
-URxvt.boldItalicFont: xft:Bitstream Vera Sans Mono:bold:italic:autohint=true
+! See fc-match and fc-font
+! e.g.: fc-match --all | cut -d: -f2 | sort -u
+! for a list of available fonts
+! Change fonts at runtime:
+! e.g.: printf '\33]50;%s\007' "xft:Inconsolata:pixelsize=20:bold"
+URxvt.font:           xft:Monaco:pixelsize=18:regular, xft:DejaVu Sans Mono:pixelsize=18:book, xft:Inconsolata:pixelsize=18:regular
+URxvt.boldFont:       xft:Inconsolata:pixelsize=22:bold, xft:DejaVu Sans Mono:pixelsize=22:bold
+URxvt.italicFont:     xft:DejaVu Sans Mono:pixelsize=18:oblique, xft:Monofur:pixelsize=18:italic
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:pixelsize=22:bold:oblique
 
-! Change font size on the fly (mod+'+', mod+'-'), open urls in default browser
-! (mod+u)
+! Change font size on the fly (mod+'+', mod+'-', mod+'=' for default size)
+! Open urls in default browser (mod+u)
 URxvt.perl-ext-common: resize-font,url-select
 
 ! Settings for url-select

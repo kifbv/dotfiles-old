@@ -1,3 +1,5 @@
+set nocompatible
+
 " ================= PLUGINS
 "
 " To install vim-plug itself:
@@ -79,6 +81,9 @@ Plug 'terryma/vim-multiple-cursors'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 
+" Show diff level of parentheses
+Plug 'luochen1990/rainbow'
+
 " Initialize plugin system
 call plug#end()
 
@@ -156,14 +161,48 @@ if &t_Co == 8 && $TERM !~# '^linux\|^Eterm'
   set t_Co=16
 endif
 
-" Very personal preferences
-set noswapfile
-inoremap jk <ESC>
-nnoremap ; :
-nnoremap : ;
-colorscheme monokai-phoenix
+" Change mapleader from \ to <Space>
+let mapleader=" "
+
+" Use F2 to toggle between paste/nopaste
+set pastetoggle=<F2>
+
+" Toggle show/hide invisible chars
+nnoremap <leader>i :set list!<cr>
+
+
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" Steve Losh
+set ttyfast
+set undofile
+"very magic pattern matching (more similar to Perl regex)
+nnoremap / /\v
+vnoremap / /\v
+"go to matching sign with <tab> instead of %
+nnoremap <tab> %
+vnoremap <tab> %
+"go up/down by screen line instead of file line
+nnoremap j gj
+nnoremap k gk
+
+" Personal preferences
+colorscheme monokai-phoenix
+" yolo
+set noswapfile
+" set cursorline on active window
+set cursorline
+au WinLeave * set nocursorline
+au WinEnter * set cursorline
+" don't reach for escape, capslocks,... key to exit insert mode
+inoremap jk <ESC>
+" I don't use ;
+nnoremap ; :
+"nnoremap : ;
+"modify and source .vimrc easily
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " ================= PLUGIN SETTINGS
 "
@@ -227,7 +266,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -252,3 +291,7 @@ let g:vim_json_syntax_conceal = 0
 " Check github for more settings and usage
 set updatetime=300
 nmap gh <Plug>GitGutterNextHunk
+
+" ================= rainbow
+" Activate rainbow parentheses
+let g:rainbow_active = 1

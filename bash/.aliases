@@ -38,6 +38,9 @@ alias la="ls -laF ${colorflag}"
 # shellcheck disable=SC2139
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
+# Colorized cat
+alias cat='ccat --bg=dark'
+
 # Always enable colored `grep` output
 alias grep='grep --color=auto '
 
