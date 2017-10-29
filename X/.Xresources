@@ -33,7 +33,9 @@ URxvt.boldItalicFont: xft:DejaVu Sans Mono:pixelsize=22:bold:oblique
 
 ! Change font size on the fly (mod+'+', mod+'-', mod+'=' for default size)
 ! Open urls in default browser (mod+u)
-URxvt.perl-ext-common: resize-font,url-select
+! Copy by selecting with the mouse.
+! Press Shift-Insert to insert the value of the PRIMARY selection.
+URxvt.perl-ext-common: resize-font,url-select,selection-to-clipboard
 
 ! Settings for url-select
 URxvt.keysym.M-u:           perl:url-select:select_next

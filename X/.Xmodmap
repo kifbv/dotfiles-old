@@ -1,0 +1,42 @@
+! remap some keys for productivity and French letters
+! keycodes can be checked with xev
+! See http://wiki.linuxquestions.org/wiki/List_of_Keysyms_Recognised_by_Xmodmap
+! for list of keysyms
+
+! clear some modifiers
+clear Lock
+clear Mod1
+
+! map mod1 to Alt_R only
+add Mod1 = Alt_R
+
+! map Caps_Lock → Escape
+! unmap Escape
+keycode  66 = Escape
+keycode   9 =
+
+! map Alt_L → Mod_switch
+! to use Alt_L to insert French letters
+keycode 64 = Mode_switch
+
+! remap \| → `~ (key left to z)
+keycode  94 = grave asciitilde
+
+! French letters access with Alt_L
+keycode  26 = e E egrave eacute
+keycode  30 = u U ugrave
+keycode  31 = i I icircumflex
+keycode  32 = o O ocircumflex
+keycode  38 = a A agrave acircumflex
+keycode  54 = c C ccedilla copyright
+
+! Dead signs to add to less common letters (ê, û,...)
+! sau pentru lîmba Română...
+keycode  48 = apostrophe quotedbl dead_acute dead_diaeresis
+keycode  59 = comma less dead_cedilla less
+keycode  15 = 6 asciicircum dead_circumflex dead_breve
+!ajouter le scedilla pour le roumain
+
+! Currency signs
+keycode  12 = 3 numbersign sterling
+keycode  13 = 4 dollar EuroSign

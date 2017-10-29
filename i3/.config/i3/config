@@ -2,7 +2,8 @@
 # (see reload and restart bindings)
 
 ##### GENERAL SETTINGS
-# use Alt as the modifier
+# use mod1 as the modifier
+# use xmodmap to see what mod1 is
 set $mod Mod1
 
 # set some variables
