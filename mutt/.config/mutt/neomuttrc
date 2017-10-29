@@ -1,8 +1,20 @@
 set editor        = vim
 set ssl_force_tls = yes
 set mbox_type     = Maildir
-set mail_check    = 30
-set timeout       = 30
+
+# mutt 'presses' (like) a key for you (while you're idle)
+# each x sec to trigger the thing below
+set timeout=10
+
+# mutt checks for new mails on every keystroke
+# but not more often then once in 5 seconds
+set mail_check=5
+
+
+# delete existing header-settings, if there are any.
+#unmy_hdr *
+#my_hdr X-Homepage: https://franck.live
+#my_hdr X-PGP-Key: https://
 
 # COLORS ----------------------------------------
 #source ~/.config/mutt/neomutt.theme.old
@@ -63,8 +75,10 @@ unset imap_passive
 set imap_keepalive = 300
 
 # SMTP -------------------------------------------
+set sendmail = "$HOME/.config/mutt/scripts/sendmail"
 set from     = "Franck Ratier <ratier.franck@gmail.com>"
-set smtp_url = smtps://$imap_user:$imap_pass@smtp.gmail.com
+# uncomment next line to use sendmail instead of smtp
+#set smtp_url = smtps://$imap_user:$imap_pass@smtp.gmail.com
 
 # Steve Losh -------------------------------------
 set wait_key = no        # shut up, mutt
@@ -86,10 +100,10 @@ set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Header Options ---------------------------------
-ignore *                                # ignore all headers
-unignore from: to: cc: date: subject:   # show only these
-unhdr_order *                           # some distros order things by default
-hdr_order from: to: cc: date: subject:  # and in this order
+ignore *                                             # ignore all headers
+unignore content-type: from: to: cc: date: subject:  # show only these
+unhdr_order *                                        # reset ordering
+hdr_order content-type: from: to: cc: date: subject: # and order like this
 
 # Threads
 set sort     = threads                     # like gmail
@@ -142,11 +156,17 @@ set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-alternative_order text/plain text/enriched text/html
+alternative_order text/plain text/html text/enriched
 
 # View attachments properly (see ./mailcap and xdg-utils).
-# Convert html emails and display them.
 bind attach <return> view-mailcap
+
+# Open a graphical browser for mails that don't display OK with links
+#macro attach 'V' "<pipe-entry>cat >~/.cache/mail.html && xdg-open ~/.cache/mail.html && rm ~/.cache/mail.html<enter>"
+# TODO: change for /tmp
+macro attach 'V' "<pipe-entry>cat >~/.cache/mail.html && xdg-open ~/.cache/mail.html<enter>"
+
+# Convert html emails and display them.
 auto_view text/html
 
 # GooBook contact management
