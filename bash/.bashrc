@@ -3,11 +3,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# colored input text
+# see https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Escapes_between_command_input_and_output
+# see also $PS1 (check liquidprompt.theme)
+trap 'tput sgr0' DEBUG
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS. (i.e. correct line wrap on window resize)
 shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will

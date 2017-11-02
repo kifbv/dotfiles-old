@@ -1,4 +1,7 @@
 ! reload .Xresrources settings with xrdb ~/.Xresources
+! list resource names with urxvt --help 2>&1| sed -n '/:  /s/^ */! URxvt./gp'
+! list resources with description:
+! man -Pcat urxvt | sed -n '/th: b/,/^B/p'|sed '$d'|sed '/^ \{7\}[a-z]/s/^ */^/g' | sed -e :a -e 'N;s/\n/@@/g;ta;P;D' | sed 's,\^\([^@]\+\)@*[\t ]*\([^\^]\+\),! \2\n! URxvt*\1\n\n,g' | sed 's,@@\(  \+\),\n\1,g' | sed 's,@*$,,g' | sed '/^[^!]/d' | tr -d "'\`"
 ! Main Settings
 URxvt.background:      #0e0e0e
 URxvt.foreground:      #4ad5e1
@@ -10,6 +13,7 @@ URxvt.underlineColor:  yellow
 URxvt.pointerBlank:    true
 URxvt.saveLines:       8192
 URxvt.scrollBar:       false
+URxvt.fading:          30
 
 ! Global Font Settings
 Xft.antialias: true

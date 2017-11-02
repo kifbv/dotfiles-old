@@ -76,6 +76,7 @@ set imap_keepalive = 300
 
 # SMTP -------------------------------------------
 set sendmail = "$HOME/.config/mutt/scripts/sendmail"
+#set sendmail = "MIMEmbellish | msmtp -a gmail \"$@\""
 set from     = "Franck Ratier <ratier.franck@gmail.com>"
 # uncomment next line to use sendmail instead of smtp
 #set smtp_url = smtps://$imap_user:$imap_pass@smtp.gmail.com
@@ -101,9 +102,9 @@ set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)
 
 # Header Options ---------------------------------
 ignore *                                             # ignore all headers
-unignore content-type: from: to: cc: date: subject:  # show only these
+unignore from: to: cc: date: subject:  # show only these
 unhdr_order *                                        # reset ordering
-hdr_order content-type: from: to: cc: date: subject: # and order like this
+hdr_order from: to: cc: date: subject: # and order like this
 
 # Threads
 set sort     = threads                     # like gmail
@@ -157,6 +158,10 @@ unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 alternative_order text/plain text/html text/enriched
+
+# new mail to be sent is piped to MIMEmbellish which requires UTF-8 encoded
+# text
+set send_charset = "utf-8"
 
 # View attachments properly (see ./mailcap and xdg-utils).
 bind attach <return> view-mailcap

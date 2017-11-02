@@ -452,3 +452,8 @@ dell_monitor() {
 	xrandr --addmode  DP1 "3840x2160_30.00"
 	xrandr --output eDP1 --auto --primary --output DP1 --mode 3840x2160_30.00 --above eDP1 --rate 30
 }
+
+ssh_con() {
+	eval $(ssh-agent)
+	ssh-add $HOME/.ssh/id_rsa_github
+}

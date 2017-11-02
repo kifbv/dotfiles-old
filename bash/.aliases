@@ -100,6 +100,9 @@ alias map="xargs -n1"
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 #alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
+# service information of processes
+alias psc='ps xawf -eo pid,user,cgroup,%mem,%cpu,args'
+
 # Lock the screen (when going AFK)
 alias afk="slock"
 
