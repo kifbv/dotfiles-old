@@ -1,6 +1,7 @@
 #*/*; xdg-open "%s"
 #text/html; xdg-open '%s'
 image/*; xdg-open '%s'
+application/pdf; xdg-open %s
 #text/html; links %s; nametemplate=%s.html
 text/html; links -dump %s; nametemplate=%s.html; copiousoutput
 #text/html; w3m -I %{charset} -T text/html; copiousoutput;
