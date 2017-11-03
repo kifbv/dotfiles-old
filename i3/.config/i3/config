@@ -46,8 +46,9 @@ bar {
 
 ##### CONTAINERS, WINDOW CONTROLS AND NAVIGATION
 # No border
-new_window none
-hide_edge_borders both
+#new_window none
+new_window pixel 1
+hide_edge_borders smart
 
 # color window title
 # to do
