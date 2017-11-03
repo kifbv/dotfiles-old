@@ -157,7 +157,6 @@ set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-alternative_order text/plain text/html text/enriched
 
 # new mail to be sent is piped to MIMEmbellish which requires UTF-8 encoded
 # text
@@ -171,8 +170,12 @@ bind attach <return> view-mailcap
 # TODO: change for /tmp
 macro attach 'V' "<pipe-entry>cat >~/.cache/mail.html && xdg-open ~/.cache/mail.html<enter>"
 
+# Save attachments in ~/Downloads
+macro attach W "<save-entry><bol>~/Downloads/<eol>" "Save to downloads"
+
 # Convert html emails and display them.
 auto_view text/html
+alternative_order text/plain text/html text/enriched
 
 # GooBook contact management
 # (requires goobook-git; goobook authenticate (or just copy ~/.goobook_auth.json ?))
