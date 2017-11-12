@@ -131,5 +131,9 @@ alias ssh="gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 ## RVM
 #[[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source $HOME/github/nojhan/liquidprompt/liquidprompt
+# PS1 prompt
+GIT_PROMPT_ONLY_IN_REPO=0
+GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
+GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+GIT_PROMPT_END="\n→ \[\e[3m\e[93m\]"
+[[ $- = *i* ]] && source ~/github/magicmonty/.bash-git-prompt/gitprompt.sh
