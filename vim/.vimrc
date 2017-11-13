@@ -24,6 +24,9 @@ Plug 'tpope/vim-commentary'
 " sourcing it (:source Session.vim) or directly with vim -S
 Plug 'tpope/vim-obsession'
 
+" enable repeating supported plugin maps with "."
+Plug 'tpope/vim-repeat'
+
 " Helps to end certain structures automatically (e.g. Ruby: do..end)
 Plug 'tpope/vim-endwise'
 
@@ -203,6 +206,9 @@ nnoremap ; :
 "modify and source .vimrc easily
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+"re-open at same position
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
 
 " ================= PLUGIN SETTINGS
 "
