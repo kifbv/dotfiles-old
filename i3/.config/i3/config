@@ -10,13 +10,16 @@ set $mod Mod1
 set $WS1 web
 set $WS2 term
 set $WS3 mail
-set $WS4 music
+set $WS4 audio
 set $WS5 code
 set $WS6 slack
-set $WS7 extra1
-set $WS8 extra2
-set $WS9 extra3
-set $WS10 extra4
+set $WS7 7
+set $WS8 8
+set $WS9 9
+set $WS10 10
+
+set $SCREEN_SAVER_IMG ~/Downloads/07895117-photo-windowsxp.png
+set $SCREENSHOTS_FOLDER ~/Documents/screenshots/
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
