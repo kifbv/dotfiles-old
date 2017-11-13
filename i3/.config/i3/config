@@ -118,8 +118,12 @@ bindsym $mod+Shift+i  exec i3-msg move container to workspace $(i3-msg -t get_wo
 # rename workspace
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
 
+##### SCRATCHPAD
 # make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
+
+# toggle show/hide of the vpn scratchpad
+bindsym $mod+Shift+v [instance="^vpn$"] scratchpad show
 
 # toggle show/hide of the first scratchpad window
 bindsym $mod+minus scratchpad show
