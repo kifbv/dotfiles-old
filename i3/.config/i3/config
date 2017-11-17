@@ -7,19 +7,21 @@
 set $mod Mod1
 
 # set some variables
-set $WS1 web
-set $WS2 term
-set $WS3 mail
-set $WS4 audio
-set $WS5 code
-set $WS6 slack
-set $WS7 7
-set $WS8 8
-set $WS9 9
+# TODO: use ttf-font-awesome
+set $WS1  1:web
+set $WS2  2:term
+set $WS3  3:mail
+set $WS4  4:audio
+set $WS5  5:code
+set $WS6  6:slack
+set $WS7  7
+set $WS8  8
+set $WS9  9
 set $WS10 10
 
 set $SCREEN_SAVER_IMG ~/Downloads/07895117-photo-windowsxp.png
 set $SCREENSHOTS_FOLDER ~/Documents/screenshots/
+set $TOUCHPAD "DLL075B:01 06CB:76AF Touchpad"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -37,13 +39,28 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status --config ~/.config/i3/status.conf
-        #status_command i3status
-	font pango:Monaco 6
-	tray_output primary
+        status_command          i3status --config ~/.config/i3/status.conf
+	mode                    dock
+	position		bottom
+	output                  primary
+	tray_output             none
+	font                    pango:Monaco 6
+	separator_symbol        "•"
+	workspace_buttons	yes
 	strip_workspace_numbers yes
+	binding_mode_indicator	yes
 	colors {
-		separator #FF0000
+		#separator #FF0000
+				# whole color settings
+		background	"#000000"
+		statusline	"#ffffff"
+		separator	"#999999"
+
+		# Type			border		background	text
+		focused_workspace	"#008fff"	"#0093b0"	"#ffffff"
+		active_workspace	"#444444"	"#5f676a"	"#ffffff"
+		inactive_workspace	"#444444"	"#222222"	"#888888"
+		urgent_workspace	"#aa0000"	"#990000"	"#ffffff"
 	}
 }
 
@@ -152,9 +169,7 @@ bindsym $mod+Shift+y move container to output eDP1
 workspace_auto_back_and_forth yes
 bindsym $mod+z workspace back_and_forth
 
-# enter window resize mode
-bindsym $mod+r mode "resize"
-
+# SPECIAL MODES
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -178,6 +193,41 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
+# enter window resize mode
+bindsym $mod+r mode "resize"
+
+## Power management commands
+#set $locker i3lock -ec 000000
+#set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) poweroff
+#mode "$mode_system" {
+#	bindsym l exec --no-startup-id $locker, mode "default"
+#	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+#	bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
+#	bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
+#	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#	bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+#
+#	# back to normal: Enter or Escape
+#	bindsym Return mode "default"
+#	bindsym Escape mode "default"
+#}
+# enter power management mode
+#bindsym $mod+Pause mode "$mode_system"
+#
+## Manual management of external displays
+#set $mode_display Screen (1) VGA ON, (2) HDMI ON, (3) VGA OFF, (4) HDMI OFF
+#mode "$mode_display" {
+#	bindsym 1 exec --no-startup-id xrandr --output VGA-1 --auto --same-as eDP-1, mode "default"
+#	bindsym 2 exec --no-startup-id xrandr --output HDMI-1 --auto --same-as eDP-1, mode "default"
+#	bindsym 3 exec --no-startup-id xrandr --output VGA-1 --auto --off, mode "default"
+#	bindsym 4 exec --no-startup-id xrandr --output HDMI-1 --auto --off, mode "default"
+#
+#	# back to normal: Enter or Escape
+#	bindsym Return mode "default"
+#	bindsym Escape mode "default"
+#}
+# enter display management mode
+#bindsym $mod+F2 mode "$mode_display"
 
 # WINDOW ASSIGNMENTS AND STARTUP APPS
 # all browser windows open on same workspace
@@ -191,7 +241,7 @@ exec --no-startup-id urxvt -name term
 
 # start a scratchpad terminal for the vpn
 # TODO: add border for this one
-exec_always --no-startup-id urxvt -name vpn
+exec --no-startup-id urxvt -name vpn
 for_window [class="^URxvt$" instance="^vpn$"] move scratchpad
 
 # start mail on workspace 3
@@ -217,7 +267,7 @@ bindsym $mod+d exec dmenu_run
 # take a screenshot
 bindsym $mod+g exec --no-startup-id scrot -e 'mv $f $SCREENSHOTS_FOLDER'
 # take a selection screenshot (does not work, TODO: fix)
-#bindsym $mod+Shift+g exec --no-startup-id scrot -e -s 'mv $f $SCREENSHOTS_FOLDER'
+bindsym $mod+Shift+g exec --no-startup-id scrot -e -s 'mv $f $SCREENSHOTS_FOLDER'
 # lock the screen (or use slock)
 bindsym --release $mod+Shift+s exec i3lock -u -i $SCREEN_SAVER_IMG -p win -e
 
@@ -233,6 +283,10 @@ for_window [class="^feh$"] floating enable
 #for_window [window_type="dialog"] floating enable
 #for_window [window_type="menu"] floating enable
 #for_window [window_type="About"] floating enable
+
+# Touchpad controls
+bindsym $mod+t       exec --no-startup-id xinput --disable "$TOUCHPAD"
+bindsym $mod+Shift+t exec --no-startup-id xinput --enable "$TOUCHPAD"
 
 ##### EXTRA KEYS BINDINGS
 # volume
