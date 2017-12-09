@@ -50,11 +50,10 @@ bar {
 	strip_workspace_numbers yes
 	binding_mode_indicator	yes
 	colors {
-		#separator #FF0000
 				# whole color settings
 		background	"#000000"
 		statusline	"#ffffff"
-		separator	"#999999"
+		separator	"#0093b0"
 
 		# Type			border		background	text
 		focused_workspace	"#008fff"	"#0093b0"	"#ffffff"
@@ -245,10 +244,11 @@ exec --no-startup-id urxvt -name vpn
 for_window [class="^URxvt$" instance="^vpn$"] move scratchpad
 
 # start mail on workspace 3
-exec --no-startup-id i3-msg 'workspace $WS3; exec "sleep 2 && urxvt -e neomutt"'
+#exec --no-startup-id i3-msg 'workspace $WS3; exec "sleep 2 && urxvt -e neomutt"'
 # open youtube videos in the same workspace as mps-youtube
 # (fix it: not really working)
-for_window [class="^mpv$" instance="^gl$"] floating enable, move container to workspace music, focus parent
+for_window [class="^mpv$" instance="^gl$"] floating enable
+#for_window [class="^mpv$" instance="^gl$"] floating enable, move container to workspace 4, focus parent
 
 ##### APP BINDINGS
 # start a terminal

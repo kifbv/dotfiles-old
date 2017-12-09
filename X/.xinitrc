@@ -37,7 +37,7 @@ xset -fp /usr/share/fonts/misc/     # Remove the specified font path from Xorg's
 
 # set prefered web browser
 [[ $(xdg-settings check default-web-browser $defaultbrowser) = "yes" ]] || \
-xdg-settings set default-web-browser $defaultbrowse
+xdg-settings set default-web-browser $defaultbrowser
 
 # set correct DPI
 xrandr --dpi 168

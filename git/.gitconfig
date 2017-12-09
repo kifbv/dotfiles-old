@@ -195,5 +195,5 @@
 #[remote "origin"]
 	#fetch = +refs/pull/*/head:refs/remotes/origin/pull/*
 
-[commit]
-	gpgsign = true
+#[commit]
+#	gpgsign = true
