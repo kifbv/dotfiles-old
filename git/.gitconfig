@@ -95,6 +95,7 @@
 	# patchit = "!f() { curl -L $1.patch | git am --whitespace=fix; }; f"
 	patchit-please = "!f() { echo $1.patch | sed s_pull/[0-9]*/commits_commit_ | xargs curl -L | git am -3 --whitespace=fix; }; f"
 	ignored = ls-files --others --ignored --exclude-standard
+	squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
 	# patchit-please = "!f() { curl -L $1.patch | git am -3 --whitespace=fix; }; f"
 
 [apply]
