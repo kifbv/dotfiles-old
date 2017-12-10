@@ -2,7 +2,7 @@
 # You need to clone the magicmonty/bash-git-prompt repo and source it from
 # bashrc.
 
-# These are the defaults from the "Default" theme 
+# These are the defaults from the "Default" theme
 # You just need to override what you want to have changed
 override_git_prompt_colors() {
   GIT_PROMPT_THEME_NAME="Custom"
@@ -11,28 +11,31 @@ override_git_prompt_colors() {
   # PathShort="\w";
 
   ## These are the color definitions used by gitprompt.sh
-  GIT_PROMPT_PREFIX="("                 # start of the git info string
-  GIT_PROMPT_SUFFIX=")"                 # the end of the git info string
-  # GIT_PROMPT_SEPARATOR="|"              # separates each item
+  GIT_PROMPT_PREFIX="► "                 # start of the git info string
+  GIT_PROMPT_SUFFIX=""                 # the end of the git info string
+  GIT_PROMPT_SEPARATOR=" "              # separates each item
 
-  # GIT_PROMPT_BRANCH="${Magenta}"        # the git branch that is active in the current directory
-  # GIT_PROMPT_STAGED="${Red}●"           # the number of staged files/directories
-  # GIT_PROMPT_CONFLICTS="${Red}✖ "       # the number of files in conflict
-  # GIT_PROMPT_CHANGED="${Blue}✚ "        # the number of changed files
+  GIT_PROMPT_BRANCH="${Red}"        # the git branch that is active in the current directory
+  GIT_PROMPT_STAGED="${Red}●"           # the number of staged files/directories
+  GIT_PROMPT_CONFLICTS="${Red}✖"       # the number of files in conflict
+  GIT_PROMPT_CHANGED="${Yellow}✚"        # the number of changed files
 
   # GIT_PROMPT_REMOTE=" "                 # the remote branch name (if any) and the symbols for ahead and behind
-  # GIT_PROMPT_UNTRACKED="${Cyan}…"       # the number of untracked files/dirs
-  # GIT_PROMPT_STASHED="${BoldBlue}⚑ "    # the number of stashed files/dir
+  GIT_PROMPT_UNTRACKED="${Cyan}…"       # the number of untracked files/dirs
+  GIT_PROMPT_STASHED="${BoldBlue}⚑"    # the number of stashed files/dir
   GIT_PROMPT_CLEAN="${BoldGreen}✔"      # a colored flag indicating a "clean" repo
 
-  ## For the command indicator, the placeholder _LAST_COMMAND_STATE_ 
+  ## For the command indicator, the placeholder _LAST_COMMAND_STATE_
   ## will be replaced with the exit code of the last command
   ## e.g.
   GIT_PROMPT_COMMAND_OK="\n${BoldBlack}\j ${Green}✔"    # indicator if the last command returned with an exit code of 0
   GIT_PROMPT_COMMAND_FAIL="\n${BoldBlack}\j ${Red}✘-_LAST_COMMAND_STATE_"    # indicator if the last command returned with an exit code of other than 0
 
+#function prompt_callback {
+#	[[ $(jobs|wc -l) -ne 0 ]] && echo jobs
+#}
 #function _jobs_ {
-#  # can't use \j 
+#  # can't use \j
 #  local j=$(jobs|wc -l)
 #  if [[ $j -ne 0 ]]; then
 #      JOBS="\e[90m$j\e[0m "
@@ -43,7 +46,7 @@ override_git_prompt_colors() {
   GIT_PROMPT_END="\n→ \[\e[3m\e[93m\]"
 
   ## template for displaying the current virtual environment
-  ## use the placeholder _VIRTUALENV_ will be replaced with 
+  ## use the placeholder _VIRTUALENV_ will be replaced with
   ## the name of the current virtual environment (currently CONDA and VIRTUAL_ENV)
   # GIT_PROMPT_VIRTUALENV="(${Blue}_VIRTUALENV_${ResetColor}) "
 

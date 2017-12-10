@@ -132,6 +132,10 @@ alias ssh="gpg-connect-agent updatestartuptty /bye >/dev/null; ssh"
 #[[ -r "$HOME/.rvm/scripts/completion" ]] && source "$HOME/.rvm/scripts/completion"
 
 # PS1 prompt
+GIT_PROMPT_SHOW_UPSTREAM=1
+GIT_PROMPT_FETCH_REMOTE_STATUS=1
+GIT_PROMPT_SHOW_CHANGED_FILES_COUNT=1
+GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
 GIT_PROMPT_THEME=Custom # use theme optimized for solarized color scheme
 [[ $- = *i* ]] && source ~/github/magicmonty/.bash-git-prompt/gitprompt.sh

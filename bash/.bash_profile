@@ -3,7 +3,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * add a ~/.extra file to use for other settings you don’t want to commit.
-for file in ~/.{aliases,functions,path,exports}; do
+for file in ~/.{aliases,functions,dockerfunc,path,exports}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"

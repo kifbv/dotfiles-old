@@ -42,5 +42,8 @@ xdg-settings set default-web-browser $defaultbrowser
 # set correct DPI
 xrandr --dpi 168
 
+# give local programs access to X server (for Docker)
+xhost +local:
+
 # finally, start i3 window manager
 exec i3

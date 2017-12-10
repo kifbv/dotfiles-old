@@ -1,6 +1,7 @@
 [user]
 	email = ratier.franck@gmail.com
 	name = Franck Ratier
+	signingkey = AA2CE1CD12402ACC
 
 [alias]
 
@@ -93,6 +94,7 @@
 	patchit = "!f() { echo $1.patch | sed s_pull/[0-9]*/commits_commit_ | xargs curl -L | git am --whitespace=fix; }; f"
 	# patchit = "!f() { curl -L $1.patch | git am --whitespace=fix; }; f"
 	patchit-please = "!f() { echo $1.patch | sed s_pull/[0-9]*/commits_commit_ | xargs curl -L | git am -3 --whitespace=fix; }; f"
+	ignored = ls-files --others --ignored --exclude-standard
 	# patchit-please = "!f() { curl -L $1.patch | git am -3 --whitespace=fix; }; f"
 
 [apply]
@@ -195,5 +197,7 @@
 #[remote "origin"]
 	#fetch = +refs/pull/*/head:refs/remotes/origin/pull/*
 
-#[commit]
-#	gpgsign = true
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
