@@ -35,7 +35,7 @@ export GO15VENDOREXPERIMENT=1
 export DOCKER_CONTENT_TRUST=1
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+#export PATH="$PATH:$HOME/.rvm/bin"
 # https://github.com/rvm/rubygems-bundler
 # to be able to work also with bundler
-export RUBYGEMS_GEMDEPS=-
+#export RUBYGEMS_GEMDEPS=-
