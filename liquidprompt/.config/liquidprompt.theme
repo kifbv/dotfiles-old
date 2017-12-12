@@ -1,3 +1,0 @@
-LP_COLOR_PATH="$BOLD_RED"
-LP_PS1_PREFIX="\n"
-LP_PS1_POSTFIX="\n→ \[\e[3m\e[93m\]"
