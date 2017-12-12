@@ -316,7 +316,7 @@ dbs() {
 isup() {
 	local uri=$1
 
-	if curl --silent --head --location --request GET "$uri" | grep -q "200 OK"; then
+	if curl --silent --head --location --request GET "$uri" | grep -q "HTTP.*200"; then
 		notify-send --urgency=low "$uri is up"
 	else
 		notify-send --urgency=critical "$uri is down"
