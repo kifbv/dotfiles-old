@@ -19,3 +19,12 @@ Session.vim
 # Auto-generated tag files
 tags
 #########
+#
+# Python virtual env
+venv
+
+#?? i3/.config/Slack/
+#?? i3/.config/dconf/
+#?? i3/.config/gtk-2.0/
+#?? i3/.config/htop/
+#?? i3/.config/vivaldi/
