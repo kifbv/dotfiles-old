@@ -2,7 +2,7 @@
 ! list resource names with urxvt --help 2>&1| sed -n '/:  /s/^ */! URxvt./gp'
 ! list resources with description:
 ! man -Pcat urxvt | sed -n '/th: b/,/^B/p'|sed '$d'|sed '/^ \{7\}[a-z]/s/^ */^/g' | sed -e :a -e 'N;s/\n/@@/g;ta;P;D' | sed 's,\^\([^@]\+\)@*[\t ]*\([^\^]\+\),! \2\n! URxvt*\1\n\n,g' | sed 's,@@\(  \+\),\n\1,g' | sed 's,@*$,,g' | sed '/^[^!]/d' | tr -d "'\`"
-! Main Settings
+! xrvt-unicode configuration (terminal)
 URxvt.background:      #0e0e0e
 URxvt.foreground:      #4ad5e1
 URxvt.cursorColor:     #dc74d1
@@ -14,17 +14,7 @@ URxvt.pointerBlank:    true
 URxvt.saveLines:       8192
 URxvt.scrollBar:       false
 URxvt.fading:          30
-
-! Global Font Settings
-Xft.antialias: true
-Xft.autohint:  false
-Xft.dpi:       168
-Xft.hinting:   true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba:      rgb
-
-! Fonts
+! Fonts to use in the terminal
 ! See fc-match and fc-font
 ! e.g.: fc-match --all | cut -d: -f2 | sort -u
 ! for a list of available fonts
@@ -34,14 +24,21 @@ URxvt.font:           xft:Monaco:pixelsize=18:regular, xft:DejaVu Sans Mono:pixe
 URxvt.boldFont:       xft:Inconsolata:pixelsize=22:bold, xft:DejaVu Sans Mono:pixelsize=22:bold
 URxvt.italicFont:     xft:DejaVu Sans Mono:pixelsize=18:oblique, xft:Monofur:pixelsize=18:italic
 URxvt.boldItalicFont: xft:DejaVu Sans Mono:pixelsize=22:bold:oblique
-
 ! Change font size on the fly (mod+'+', mod+'-', mod+'=' for default size)
 ! Open urls in default browser (mod+u)
 ! Copy by selecting with the mouse.
 ! Press Shift-Insert to insert the value of the PRIMARY selection.
 URxvt.perl-ext-common: resize-font,url-select,selection-to-clipboard
-
 ! Settings for url-select
 URxvt.keysym.M-u:           perl:url-select:select_next
 URxvt.url-select.launcher:  /usr/bin/xdg-open
 URxvt.url-select.underline: true
+
+! Font configuration
+Xft.antialias: true
+Xft.autohint:  false
+!Xft.dpi:       113
+Xft.hinting:   true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba:      rgb

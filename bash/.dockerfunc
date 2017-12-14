@@ -228,7 +228,7 @@ dcos(){
 firefox(){
 	del_stopped firefox
 
-	docker run -d \
+	sudo docker run -d \
 		--memory 2gb \
 		--net host \
 		--cpuset-cpus 0 \
@@ -245,7 +245,7 @@ firefox(){
 		--device /dev/snd \
 		--device /dev/dri \
 		--name firefox \
-		${DOCKER_REPO_PREFIX}/firefox "$@"
+		${DOCKER_REPO_PREFIX}/firefox2 "$@"
 
 	# exit current shell
 	exit 0

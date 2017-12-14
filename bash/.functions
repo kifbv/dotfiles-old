@@ -225,7 +225,7 @@ o() {
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 tre() {
-	tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
+	tree -aC -I '.git|venv|*.un~' --dirsfirst "$@" | less -FRNX
 }
 
 # Call from a local repo to open the repository on github/bitbucket in browser
@@ -426,13 +426,17 @@ xname(){
 		-e "\${g; p}"
 }
 
-# TODO: adapt this to my monitor
 # run e.g. cvt 1024 768 to get the Modeline for the 1024x768 resolution
-# dell_monitor() {
-# 	xrandr --newmode "3840x2160_30.00"  338.75  3840 4080 4488 5136  2160 2163 2168 2200 -hsync +vsync
-# 	xrandr --addmode  DP1 "3840x2160_30.00"
-# 	xrandr --output eDP1 --auto --primary --output DP1 --mode 3840x2160_30.00 --above eDP1 --rate 30
-# }
+# 1920x1080 59.96 Hz (CVT 2.07M9) hsync: 67.16 kHz; pclk: 173.00 MHz
+# Modeline "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+rackspace_mons() {
+	xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+	xrandr --addmode  DP1-1 "1920x1080_60.00"
+	xrandr --addmode  DP1-2 "1920x1080_60.00"
+	xrandr --output eDP1 --auto --primary \
+		--output DP1-1 --mode 1920x1080_60.00 --above eDP1 \
+		--output DP1-2 --mode 1920x1080_60.00 --left-of DP1-1
+}
 
 # first start of ssh-agent
 ssh_con() {

@@ -11,6 +11,15 @@ for file in ~/.{aliases,functions,dockerfunc,path,exports}; do
 done
 unset file
 
+# Set system wide default according to hostname
+if [[ $HOSTNAME == latitude ]]; then
+	git config --global user.email "franck.ratier@rackspace.com"
+	git config --global user.signinkey "20AEF8D6EE167DAA"
+else
+	git config --global user.email "franck.ratier@gmail.com"
+	git config --global user.signinkey "AA2CE1CD12402ACC"
+fi
+
 # Load the completion files:
 for file in ~/.autocompletion_functions/*; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
