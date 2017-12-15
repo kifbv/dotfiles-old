@@ -444,3 +444,11 @@ ssh_con() {
 	eval $(ssh-agent)
 	ssh-add $HOME/.ssh/id_rsa_$key_name
 }
+
+function virtualenv_info(){
+    # Add virtual env name to the prompt if activated
+    # (this requires the VIRTUAL_ENV_DISABLE_PROMPT=1 exported)
+    [[ -n "$VIRTUAL_ENV" ]] && echo "(${VIRTUAL_ENV##*/}) "
+}
+# used in .git-prompt-colors.sh
+VENV="\$(virtualenv_info)";

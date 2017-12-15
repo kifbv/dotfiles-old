@@ -9,22 +9,18 @@ userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 defaultbrowser="vivaldi-stable.desktop"
 
-# common defaults are in .Xresources but the dpi depends on
-# the host
-case "$HOSTNAME" in
-  xps13)
-    dpi=168
-  ;;
-  latitude)
-    dpi=114
-  ;;
-esac
-
 # merge in defaults and keymaps
 [[ -f $sysresources ]] && xrdb -merge $sysresources
 [[ -f $sysmodmap ]] && xmodmap $sysmodmap
 [[ -f "$userresources" ]] && xrdb -merge -I$HOME "$userresources"
 [[ -f "$usermodmap" ]] && xmodmap "$usermodmap"
+
+# common defaults are in .Xresources but the dpi depends on
+# the host
+case "$HOSTNAME" in
+  xps) dpi=168;;
+  latitude) dpi=114;;
+esac
 
 # override dpi value for font configuration
 # TODO: override font sizes too
@@ -41,7 +37,7 @@ fi
 # X settings
 # change touchpad behaviour
 # could use /usr/share/X11/xorg.conf.d/40-libinput.conf instead
-if [[ $HOSTNAME == latitude ]]; then
+if [[ $HOSTNAME == xps ]]; then
   xinput set-prop 'DLL075B:01 06CB:76AF Touchpad' \
     'libinput Tapping Enabled' 1
   xinput set-prop 'DLL075B:01 06CB:76AF Touchpad' \

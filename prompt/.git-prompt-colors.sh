@@ -42,8 +42,9 @@ override_git_prompt_colors() {
 #  fi
 #}
 
+  # see virtualenv_info function for venv integration
   GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_END="\n→ \[\e[3m\e[93m\]"
+  GIT_PROMPT_END="\n${VENV}→ \[\e[3m\e[93m\] "
 
   ## template for displaying the current virtual environment
   ## use the placeholder _VIRTUALENV_ will be replaced with

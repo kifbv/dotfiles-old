@@ -1,5 +1,4 @@
 [user]
-	# User .email and .signingkey are set in .bash_profile
 	name = Franck Ratier
 	email = franck.ratier@rackspace.com
 	signinkey = 20AEF8D6EE167DAA
