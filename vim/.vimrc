@@ -301,3 +301,47 @@ nmap gh <Plug>GitGutterNextHunk
 " ================= rainbow
 " Activate rainbow parentheses
 let g:rainbow_active = 1
+
+" Backups, undos, and swap files
+"-----------------------------------------------------------------------------
+" Save your backups to a less annoying place than the current directory.
+set backupdir-=.
+set backupdir+=~/.vim/backup,/tmp
+set backup
+" Prevent backups from overwriting each other. The naming is weird,
+" since I'm using the 'backupext' variable to append the path.
+" So the file '/home/docwhat/.vimrc' becomes '.vimrc%home%docwhat~'
+if has('autocmd')
+  augroup MyBackupGroup
+    autocmd!
+    autocmd BufWritePre * nested let &backupext = substitute(expand('%:p:h'), '/', '%', 'g') . '~'
+  augroup END
+endif
+
+" Save your swp files to a less annoying place than the current directory.
+set directory=~/.vim/swp,/tmp
+
+" viminfo stores the the state of your previous editing session
+if exists('+undofile')
+  " undofile - This allows you to use undos after exiting and restarting
+  set undodir=~/.vim/undo,/tmp
+  set undofile
+  set undolevels=1000         " maximum number of changes that can be undone
+  set undoreload=10000        " maximum number lines to save for undo on a buffer reload
+endif
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+" Also don't do it when the mark is in the first line, that is the default
+" position when opening a file.
+if has('autocmd')
+  augroup MyLastCursor
+    autocmd!
+    autocmd BufReadPost * nested
+          \ if line("'\"") > 1 && line("'\"") <= line("$") |
+          \   exe "normal! g`\"" |
+          \ endif
+  augroup END
+endif
+
