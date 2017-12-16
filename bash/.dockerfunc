@@ -296,13 +296,13 @@ hollywood(){
 		--name hollywood \
 		${DOCKER_REPO_PREFIX}/hollywood
 }
-htop(){
-	docker run --rm -it \
-		--pid host \
-		--net none \
-		--name htop \
-		${DOCKER_REPO_PREFIX}/htop
-}
+#htop(){
+#	docker run --rm -it \
+#		--pid host \
+#		--net none \
+#		--name htop \
+#		${DOCKER_REPO_PREFIX}/htop
+#}
 http(){
 	docker run -t --rm \
 		-v /var/run/docker.sock:/var/run/docker.sock \
@@ -516,26 +516,26 @@ nmap(){
 		--net host \
 		${DOCKER_REPO_PREFIX}/nmap "$@"
 }
-notify_osd(){
-	del_stopped notify_osd
-
-	docker run -d \
-		-v /etc/localtime:/etc/localtime:ro \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		--net none \
-		-v /etc \
-		-v /home/user/.dbus \
-		-v /home/user/.cache/dconf \
-		-e "DISPLAY=unix${DISPLAY}" \
-		--name notify_osd \
-		${DOCKER_REPO_PREFIX}/notify-osd
-}
-alias notify-send=notify_send
-notify_send(){
-	relies_on notify_osd
-	local args=${*:2}
-	docker exec -i notify_osd notify-send "$1" "${args}"
-}
+#notify_osd(){
+#	del_stopped notify_osd
+#
+#	docker run -d \
+#		-v /etc/localtime:/etc/localtime:ro \
+#		-v /tmp/.X11-unix:/tmp/.X11-unix \
+#		--net none \
+#		-v /etc \
+#		-v /home/user/.dbus \
+#		-v /home/user/.cache/dconf \
+#		-e "DISPLAY=unix${DISPLAY}" \
+#		--name notify_osd \
+#		${DOCKER_REPO_PREFIX}/notify-osd
+#}
+#alias notify-send=notify_send
+#notify_send(){
+#	relies_on notify_osd
+#	local args=${*:2}
+#	docker exec -i notify_osd notify-send "$1" "${args}"
+#}
 opensnitch(){
 	del_stopped opensnitchd
 	del_stopped opensnitch
