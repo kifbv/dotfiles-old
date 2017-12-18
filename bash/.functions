@@ -248,6 +248,9 @@ repo() {
 	# Fix git@gitlab.com: URLs
 	base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
 
+	# Fix git@github.rackspace.com: URLs
+	base_url=${base_url//git@github\.rackspace\.com:/https:\/\/github\.rackspace\.com\/}
+
 	# Validate that this folder is a git folder
 	if ! git branch 2>/dev/null 1>&2 ; then
 		echo "Not a git repo!"
@@ -274,10 +277,7 @@ repo() {
 	[[ $base_url == *bitbucket* ]] && tree="src" || tree="tree"
 	url="$base_url/$tree/$branch$relative_path"
 
-
-	echo "Calling $(type open) for $url"
-
-	xdg-open "$url" &> /dev/null || (echo "Using $(type open) to open URL failed." && exit 1);
+	xdg-open "$url" &> /dev/null || (echo "Using $(type xdg-open) to open URL failed." && exit 1);
 }
 
 # Get colors in manual pages
@@ -445,6 +445,7 @@ ssh_con() {
 	ssh-add $HOME/.ssh/id_rsa_$key_name
 }
 
+# helper function to add virtual env info to PS1
 function virtualenv_info(){
     # Add virtual env name to the prompt if activated
     # (this requires the VIRTUAL_ENV_DISABLE_PROMPT=1 exported)
@@ -452,3 +453,15 @@ function virtualenv_info(){
 }
 # used in .git-prompt-colors.sh
 VENV="\$(virtualenv_info)";
+
+# helper function to add faws info to PS1
+function faws_active_env() {
+  if [[ -z $FAWS_CURRENT_TOKEN_EXPIRATION ]]; then
+    return
+  fi
+
+  if [[ $FAWS_CURRENT_TOKEN_EXPIRATION -gt $(date +%s) ]]; then
+    echo "[${FAWS_CURRENT_RACKSPACE_ACCOUNT} - ${FAWS_CURRENT_ACCOUNT_NAME}] "
+  fi
+}
+FAWS="\$(faws_active_env)"
