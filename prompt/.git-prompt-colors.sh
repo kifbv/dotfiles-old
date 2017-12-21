@@ -44,7 +44,7 @@ override_git_prompt_colors() {
 
   # see virtualenv_info function for venv integration
   GIT_PROMPT_ONLY_IN_REPO=0
-  GIT_PROMPT_END="\n${FAWS}${BoldBlue}${VENV}${ResetColor}→ \[\e[3m\e[92m\] "
+  GIT_PROMPT_END="\n${FAWS}${BoldBlue}${VENV}${ResetColor}→ \[\e[3m\e[92m\]"
 
   ## template for displaying the current virtual environment
   ## use the placeholder _VIRTUALENV_ will be replaced with
