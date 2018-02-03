@@ -3,9 +3,20 @@
 ! See http://wiki.linuxquestions.org/wiki/List_of_Keysyms_Recognised_by_Xmodmap
 ! for list of keysyms
 
+! run `xmodmap` to see modifiers mapping
 ! clear some modifiers
 clear Lock
 clear Mod1
+clear Mod4
+
+! KBParadise (ports 2 and 6 ON)
+! map Win_L and Win_R to control
+add control = Super_L
+add control = Super_R
+! map Control_L to Escape
+keycode 37 = Escape
+! map `~ to Insert (key left to 1)
+keycode 49 = Insert
 
 ! map mod1 to Alt_R only
 add Mod1 = Alt_R
