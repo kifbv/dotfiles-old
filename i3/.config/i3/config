@@ -271,11 +271,10 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # take a screenshot
-bindsym $mod+g exec --no-startup-id scrot -e 'mv $f $SCREENSHOTS_FOLDER'
+#bindsym $mod+g exec --no-startup-id scrot -e 'mv $f $SCREENSHOTS_FOLDER'
 # take a selection screenshot (does not work, TODO: fix)
 #bindsym $mod+Shift+g exec --no-startup-id scrot -s -e 'mv $f $SCREENSHOTS_FOLDER'
 bindsym $mod+Shift+g exec --no-startup-id maim -usk $SCREENSHOTS_FOLDER/$(date +%s).png
-
 # lock the screen with a background
 #bindsym --release $mod+Shift+s exec i3lock -u -i $SCREEN_SAVER_IMG -p win -e
 # lock the screen using slock
