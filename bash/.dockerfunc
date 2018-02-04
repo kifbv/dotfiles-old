@@ -1071,20 +1071,20 @@ yubico_piv_tool(){
 }
 alias yubico-piv-tool="yubico_piv_tool"
 
-zoom(){
-	del_stopped zoom
-
-	sudo docker run -d \
-		--net=host \
-		--name zoom \
-		-e DISPLAY=:0 \
-		--device /dev/video0:/dev/video0 \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-		-v /dev/snd:/dev/snd \
-		--privileged \
-		-v /run/user/1000/pulse:/run/pulse \
-		zoom
-}
+#zoom(){
+#	del_stopped zoom
+#
+#	sudo docker run -d \
+#		--net=host \
+#		--name zoom \
+#		-e DISPLAY=:0 \
+#		--device /dev/video0:/dev/video0 \
+#		-v /tmp/.X11-unix:/tmp/.X11-unix \
+#		-v /dev/snd:/dev/snd \
+#		--privileged \
+#		-v /run/user/1000/pulse:/run/pulse \
+#		zoom
+#}
 
 
 ###

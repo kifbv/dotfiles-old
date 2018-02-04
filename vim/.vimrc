@@ -87,6 +87,9 @@ Plug 'terryma/vim-multiple-cursors'
 " Show diff level of parentheses
 Plug 'luochen1990/rainbow'
 
+" Vim Ruby
+Plug 'vim-ruby/vim-ruby'
+
 " Initialize plugin system
 call plug#end()
 
@@ -305,27 +308,14 @@ let g:rainbow_active = 1
 " Backups, undos, and swap files
 "-----------------------------------------------------------------------------
 " Save your backups to a less annoying place than the current directory.
-set backupdir-=.
-set backupdir+=~/.vim/backup,/tmp
-set backup
-" Prevent backups from overwriting each other. The naming is weird,
-" since I'm using the 'backupext' variable to append the path.
-" So the file '/home/docwhat/.vimrc' becomes '.vimrc%home%docwhat~'
-if has('autocmd')
-  augroup MyBackupGroup
-    autocmd!
-    autocmd BufWritePre * nested let &backupext = substitute(expand('%:p:h'), '/', '%', 'g') . '~'
-  augroup END
-endif
+set backupdir=~/.vim/backup//,/tmp/
 
 " Save your swp files to a less annoying place than the current directory.
-set directory=~/.vim/swp,/tmp
+set directory=~/.vim/swp//,/tmp//
 
 " viminfo stores the the state of your previous editing session
 if exists('+undofile')
-  " undofile - This allows you to use undos after exiting and restarting
-  set undodir=~/.vim/undo,/tmp
-  set undofile
+  set undodir=~/.vim/undo//,/tmp//
   set undolevels=1000         " maximum number of changes that can be undone
   set undoreload=10000        " maximum number lines to save for undo on a buffer reload
 endif

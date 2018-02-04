@@ -3,6 +3,7 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * add a ~/.extra file to use for other settings you don’t want to commit.
+#for file in ~/.{aliases,functions,faws_emea_functions,dockerfunc,path,exports}; do
 for file in ~/.{aliases,functions,dockerfunc,path,exports}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
@@ -10,6 +11,14 @@ for file in ~/.{aliases,functions,dockerfunc,path,exports}; do
 	fi
 done
 unset file
+
+# source faws functions
+[[ -d ~/.sceptre_tools ]] &&\
+    for f in ~/.sceptre_tools/functions/*; do
+        if [[ -r "$f" ]] && [[ -f "$f" ]]; then
+            source "$f"
+        fi
+    done
 
 # Load the completion files:
 for file in ~/.autocompletion_functions/*; do

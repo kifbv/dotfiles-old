@@ -7,3 +7,6 @@ export PATH="$PATH:$GOBIN"
 
 # Local
 export PATH="$PATH:$HOME/.local/bin"
+
+# Ruby gems
+export PATH="$PATH:$(ruby -rrubygems -e "puts Gem.user_dir")/bin:./bin"

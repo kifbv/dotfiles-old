@@ -235,21 +235,24 @@ repo() {
 	local base_url
 	base_url=$(git config --get remote.origin.url)
 	base_url=${base_url%\.git} # remove .git from end of string
+        base_url=${base_url/://};
+        base_url=${base_url//git@/https:\/\/};
+        base_url=${base_url//git:/https:\/\/};
 
-	# Fix git@github.com: URLs
-	base_url=${base_url//git@github\.com:/https:\/\/github\.com\/}
+	## Fix git@github.com: URLs
+	#base_url=${base_url//git@github\.com:/https:\/\/github\.com\/}
 
-	# Fix git://github.com URLS
-	base_url=${base_url//git:\/\/github\.com/https:\/\/github\.com\/}
+	## Fix git://github.com URLS
+	#base_url=${base_url//git:\/\/github\.com/https:\/\/github\.com\/}
 
-	# Fix git@bitbucket.org: URLs
-	base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
+	## Fix git@bitbucket.org: URLs
+	#base_url=${base_url//git@bitbucket.org:/https:\/\/bitbucket\.org\/}
 
-	# Fix git@gitlab.com: URLs
-	base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
+	## Fix git@gitlab.com: URLs
+	#base_url=${base_url//git@gitlab\.com:/https:\/\/gitlab\.com\/}
 
-	# Fix git@github.rackspace.com: URLs
-	base_url=${base_url//git@github\.rackspace\.com:/https:\/\/github\.rackspace\.com\/}
+	## Fix git@github.rackspace.com: URLs
+	#base_url=${base_url//git@github\.rackspace\.com:/https:\/\/github\.rackspace\.com\/}
 
 	# Validate that this folder is a git folder
 	if ! git branch 2>/dev/null 1>&2 ; then
@@ -465,3 +468,111 @@ function faws_active_env() {
   fi
 }
 FAWS="\$(faws_active_env)"
+
+## work on customer project
+#function workon() {
+#	local projects_dir=~/github.rackspace/FAWS/
+#	if [[ ! -d $projects_dir/$1 ]]; then
+#		echo "No such customer."
+#	else
+#		deactivate &>/dev/null
+#		cd $projects_dir/$1 && source venv/bin/activate
+#	fi
+#}
+
+# RACKSPACE FAWS SPECIFIC FUNCTIONS
+
+function sft_help() {
+	echo -e "usage:\n\tsft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via <bastion_host_id> <instance_id>"
+	echo -e "example:\n\tsft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via i-0a7facbdb62e3985e i-0097e71f8075e5a5a"
+}
+
+#function workon() {
+#    local answer=
+#    local project=$1
+#    # find most probable location
+#    faws_repo="$(
+#        (for repo in $(find ~ -name .git -type d);
+#            do [[ $(git config --file ${repo}/config --get remote.origin.url) =~\
+#                "github.rackspace.com:FAWS" ]] && echo $(dirname ${repo%/.git}); done
+#        ) 2>/dev/null |\
+#        sort | uniq -c | sort -k1,1nr -k2 | head -n1 | tr -s ' ' | cut -d ' ' -f3
+#    )"
+#    # list possible projects
+#    projects=( $(find $faws_repo -mindepth 1 -maxdepth 1 -iname "*$project*" -print0 | xargs -0 -i% basename %) )
+#    projects_number=${#projects[@]}
+#    if [[ $projects_number -eq 0 ]]; then
+#        echo "No project name containing '$project'."
+#    elif [[ $projects_number -eq 1 ]]; then
+#        target=${projects[0]}
+#    else
+#        for ((i=0; i<${#projects[@]}; i+=1)); do
+#            echo -e "\t$i - ${projects[$i]}"
+#        done
+#        while [[ -z "$answer" ]]; do
+#            read -p "Choose a project: " answer
+#            # TODO: input validation
+#            case $answer in
+#                ''|*[!0-9]*) answer= ;;
+#                *) break;;
+#            esac
+#        done
+#        target=${projects[$answer]}
+#    fi
+#    # activate virtual environment
+#    [[ $(type deactivate &>/dev/null) ]] && deactivate
+#    cd "${faws_repo}/${target}" && \
+#	    source venv/bin/activate
+#}
+#
+#function _gtp() {
+#	local cur
+#	_init_completion || return
+#	cur="${COMP_WORDS[COMP_CWORD]}"
+#	local tpl=$(find  ~/github/rax-brazil/CloudFormations/latest/aviator/* -type f -iname *${cur}*.template -print0 | xargs -0 -I% basename %)
+#	COMPREPLY=( $(compgen -W "${tpl//.template/}")  )
+#}
+#complete -F _gtp -o default gtp
+#
+#function gtp() {
+#	local tpl=$1
+#	local raxdir="/home/franck/github/rax-brazil/CloudFormations/.git/"
+#	local raxtpl="master:latest/aviator"
+#
+#	if [[ ! -d templates ]]; then
+#		echo "ERROR: not in a Sceptre dir"
+#	else
+#		git     --no-pager \
+#			--git-dir=$raxdir \
+#			show $raxtpl/${tpl}.template > templates/${tpl}.json &&\
+#		{
+#			sed -i "s/${tpl}.template/${tpl}.json/" templates/${tpl}.json ||\
+#			echo "WARN: no filename description in template $tpl";
+#		} &&\
+#		{
+#			cfg_name=$(sed -E 's/(^|_)([a-z0-9])/\U\2/g' <<< $tpl)
+#			for d in $(find config/* -type d); do
+#				local environment="${d#config/}"
+#				environment="${environment^}"
+#				if ! [[ -e $d/$cfg_name.yaml ]]; then
+#					cat <<-EOF> $d/$cfg_name.yaml
+#						template_path: templates/$tpl.json
+#
+#						parameters:
+#					EOF
+#					cat templates/$tpl.json |\
+#						jq '.Parameters |
+#						[(keys - ["data"])[] as $key |
+#						{ ($key): .[$key].Default}] | add' |\
+#						sed -e 's/^[{}]//g' \
+#						-e 's/":/:/' \
+#						-e 's/  "/  /' \
+#						-e 's/,$//' \
+#						-e 's/null/MANDATORY/' \
+#						-e 's,''Environment: "Development",Environment: '"\"$environment\"",\
+#						-e '/^$/d' >> $d/$cfg_name.yaml
+#				fi
+#			done
+#		}
+#	fi
+#}
