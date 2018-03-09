@@ -135,3 +135,5 @@ alias prikey="more ~/.ssh/id_ed25519 | xclip -selection clipboard | echo '=> Pri
 alias cvpn="sudo /opt/cisco/anyconnect/bin/vpn connect vpn1.lon3.rackspace.com"
 
 alias workon="faws_workon"
+
+alias sft_connect='sft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via '

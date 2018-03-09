@@ -13,8 +13,8 @@ done
 unset file
 
 # source faws functions
-[[ -d ~/.sceptre_tools ]] &&\
-    for f in ~/.sceptre_tools/functions/*; do
+[[ -d ~/.sceptre-tools ]] &&\
+    for f in ~/.sceptre-tools/functions/*; do
         if [[ -r "$f" ]] && [[ -f "$f" ]]; then
             source "$f"
         fi

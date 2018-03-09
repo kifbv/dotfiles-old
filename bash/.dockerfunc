@@ -383,7 +383,7 @@ kvm(){
 		${DOCKER_REPO_PREFIX}/kvm
 }
 libreoffice(){
-	del_stopped libreoffice
+	del_stopped libreoffice${1:-0}
 
 	sudo docker run -d \
 		-v /etc/localtime:/etc/localtime:ro \
@@ -392,7 +392,7 @@ libreoffice(){
 		-v "${HOME}/Downloads:/root/Documents" \
 		-e GDK_SCALE \
 		-e GDK_DPI_SCALE \
-		--name libreoffice \
+		--name libreoffice${1:-0} \
 		${DOCKER_REPO_PREFIX}/libreoffice
 }
 lpass(){

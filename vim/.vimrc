@@ -300,6 +300,7 @@ let g:vim_json_syntax_conceal = 0
 " Check github for more settings and usage
 set updatetime=300
 nmap gh <Plug>GitGutterNextHunk
+nmap gp <Plug>GitGutterPrevHunk
 
 " ================= rainbow
 " Activate rainbow parentheses
