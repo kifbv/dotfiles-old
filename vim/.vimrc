@@ -55,8 +55,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'Reewr/vim-monokai-phoenix'
 "Plug 'altercation/vim-colors-solarized'
 
-" Go development plugin
-Plug 'fatih/vim-go'
+" Go development plugin + snippets
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+"Plug 'SirVer/ultisnips'
 
 " HCL formating with :HclFmt (requires go get github.com/fatih/hclfmt)
 "Plug 'fatih/vim-hclfmt'
