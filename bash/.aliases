@@ -83,7 +83,9 @@ alias urlencode='python2 -c "import sys, urllib as ul; print ul.quote_plus(sys.a
 
 # git
 alias gs="git s"
+alias gsu="git su"
 alias gl="git l"
+alias gln="git l | /usr/bin/cat -n"
 
 # Merge PDF files
 # Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
@@ -132,8 +134,21 @@ alias pubkey="more ~/.ssh/id_ed25519.pub | xclip -selection clipboard | echo '=>
 alias prikey="more ~/.ssh/id_ed25519 | xclip -selection clipboard | echo '=> Private key copied to pasteboard.'"
 
 # connect to Cisco VPN
-alias cvpn="sudo /opt/cisco/anyconnect/bin/vpn connect vpn1.lon3.rackspace.com"
+alias cvpn="sudo /opt/cisco/anyconnect/bin/vpn connect vpn.lon5.rackspace.com"
 
 alias workon="faws_workon"
 
-alias sft_connect='sft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via '
+#alias sft_connect='sft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via '
+
+alias upload_tpl='/home/franck/github.rackspace/FAWS-EMEA-Build/sceptre-tools/scripts/upload_templates'
+
+#alias docker='sudo docker'
+
+alias kbparadise='xmodmap ~/.Xmodmap'
+
+alias manual_update='sudo pacman -Sy archlinux-keyring && sudo pacman -Su'
+
+alias ll='ls -l'
+
+alias activate_ebs_snapper='source ~/github/rackerlabs/ebs_snapper/venv/bin/activate'
+alias activate_resretain='source ~/github.rackspace/FAWS/CodeSnippets/resretain/venv/bin/activate'

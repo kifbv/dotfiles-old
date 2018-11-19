@@ -487,6 +487,41 @@ function sft_help() {
 	echo -e "example:\n\tsft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via i-0a7facbdb62e3985e i-0097e71f8075e5a5a"
 }
 
+function self_signed_cert() {
+	openssl genrsa 2048 > $1.key
+	openssl req -new -x509 -nodes -days 3650 -extensions v3_ca -key $1.key > $1.crt
+}
+
+update_rax ()
+{
+    cd ~/github/rax-brazil/CloudFormations/ && git pull && gl;
+    cd -
+}
+
+#function rretain() {
+#  for s in $(/usr/bin/aws --region ${1:-region} cloudformation list-stacks | \
+#    jq -r '.StackSummaries | .[].StackName'); do
+#      resretain --stack $s --region ${1:-region}
+#    done
+#}
+
+function rretain_list() {
+  /usr/bin/aws --region ${1:-region} cloudformation list-stacks \
+    --stack-status-filter CREATE_COMPLETE UPDATE_COMPLETE | \
+    jq -r '.StackSummaries | .[].StackName'
+}
+
+function rretain_check() {
+  for s in $(rretain_list $1); do
+    echo -n "$s: " && \
+    aws --region $1 cloudformation get-template --stack-name $s | \
+    grep -c '"DeletionPolicy": "Retain"'
+  done
+}
+
+function sft_connect() {
+  sft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via i-$1 i-$2
+}
 #function workon() {
 #    local answer=
 #    local project=$1

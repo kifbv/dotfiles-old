@@ -139,3 +139,18 @@ GIT_PROMPT_SHOW_UNTRACKED_FILES=no
 GIT_PROMPT_THEME_FILE=~/.git-prompt-colors.sh
 GIT_PROMPT_THEME=Custom # use theme optimized for solarized color scheme
 [[ $- = *i* ]] && source ~/github/magicmonty/.bash-git-prompt/gitprompt.sh
+
+# Set up Node Version Manager
+source /usr/share/nvm/init-nvm.sh
+
+# Set GPG TTY
+export GPG_TTY=$(tty)
+
+# Refresh gpg-agent tty in case user switches into an X session
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/franck/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/home/franck/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/franck/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/home/franck/Downloads/google-cloud-sdk/completion.bash.inc'; fi

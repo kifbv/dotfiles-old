@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Golang
-export GOPATH="$HOME/go:$HOME/code/go"
-export GOBIN="$HOME/go/bin:$HOME/code/go/bin"
+export GOPATH="$(go env GOPATH)"
+export GOBIN="$(go env GOPATH)/bin"
 export PATH="$PATH:$GOBIN"
 
 # Local
@@ -10,3 +10,6 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Ruby gems
 export PATH="$PATH:$(ruby -rrubygems -e "puts Gem.user_dir")/bin:./bin"
+
+# TFEnv
+export PATH="$PATH:$HOME/.tfenv/bin"

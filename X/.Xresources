@@ -20,10 +20,10 @@ URxvt.fading:          20
 ! for a list of available fonts
 ! Change fonts at runtime:
 ! e.g.: printf '\33]50;%s\007' "xft:Inconsolata:pixelsize=20:bold"
-URxvt.font:           xft:Monaco:pixelsize=15:regular, xft:DejaVu Sans Mono:pixelsize=15:book, xft:Inconsolata:pixelsize=15:regular
-URxvt.boldFont:       xft:Inconsolata:pixelsize=19:bold, xft:DejaVu Sans Mono:pixelsize=19:bold
-URxvt.italicFont:     xft:DejaVu Sans Mono:pixelsize=15:oblique, xft:Monofur:pixelsize=15:italic
-URxvt.boldItalicFont: xft:DejaVu Sans Mono:pixelsize=19:bold:oblique
+URxvt.font:           xft:Monaco:pixelsize=12:regular, xft:DejaVu Sans Mono:pixelsize=12:book, xft:Inconsolata:pixelsize=12:regular
+URxvt.boldFont:       xft:Inconsolata:pixelsize=16:bold, xft:DejaVu Sans Mono:pixelsize=16:bold
+URxvt.italicFont:     xft:DejaVu Sans Mono:pixelsize=12:oblique, xft:Monofur:pixelsize=12:italic
+URxvt.boldItalicFont: xft:DejaVu Sans Mono:pixelsize=16:bold:oblique
 ! Change font size on the fly (mod+'+', mod+'-', mod+'=' for default size)
 ! Open urls in default browser (mod+u)
 ! Copy by selecting with the mouse.

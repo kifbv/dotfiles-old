@@ -19,6 +19,8 @@ unset file
             source "$f"
         fi
     done
+# and this one too for now...
+source ~/github.rackspace/FAWS-EMEA-Build/cli-tools/functions/faws_get
 
 # Load the completion files:
 for file in ~/.autocompletion_functions/*; do
