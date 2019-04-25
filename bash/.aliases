@@ -152,3 +152,5 @@ alias ll='ls -l'
 
 alias activate_ebs_snapper='source ~/github/rackerlabs/ebs_snapper/venv/bin/activate'
 alias activate_resretain='source ~/github.rackspace/FAWS/CodeSnippets/resretain/venv/bin/activate'
+
+alias restart_network='sudo systemctl restart NetworkManager && sleep 10 && sudo systemctl restart vpnagentd.service'

@@ -65,10 +65,10 @@ Plug 'fatih/vim-go'
 Plug 'Shougo/neocomplete'
 
 " Whitespace highlighting
-Plug 'ntpeters/vim-better-whitespace'
+"Plug 'ntpeters/vim-better-whitespace'
 
 " Multiple selections, use *<C-n> for a starter
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 
 " Fuzzy file, buffer etc finder
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -89,6 +89,11 @@ Plug 'luochen1990/rainbow'
 
 " Vim Ruby
 Plug 'vim-ruby/vim-ruby'
+
+" Terraform plugins
+"Plug 'hashivim/vim-terraform'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'juliosueiras/vim-terraform-completion'
 
 " Initialize plugin system
 call plug#end()
@@ -128,12 +133,12 @@ set laststatus=2
 set ruler
 set wildmenu
 
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
+"if !&scrolloff
+"  set scrolloff=1
+"endif
+"if !&sidescrolloff
+"  set sidescrolloff=5
+"endif
 
 set display+=lastline
 
@@ -302,9 +307,36 @@ set updatetime=300
 nmap gh <Plug>GitGutterNextHunk
 nmap gp <Plug>GitGutterPrevHunk
 
-" ================= rainbow
-" Activate rainbow parentheses
-let g:rainbow_active = 1
+" ================= terraform
+" Syntastic Config
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" (Optional)Remove Info(Preview) window
+"set completeopt-=preview
+
+" (Optional)Hide Info(Preview) window after completions
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"
+"" (Optional) Enable terraform plan to be include in filter
+"let g:syntastic_terraform_tffilter_plan = 1
+"
+"" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+"let g:terraform_completion_keys = 1
+"
+"" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+"let g:terraform_registry_module_completion = 0
+"
+"" ================= rainbow
+"" Activate rainbow parentheses
+"let g:rainbow_active = 1
 
 " Backups, undos, and swap files
 "-----------------------------------------------------------------------------

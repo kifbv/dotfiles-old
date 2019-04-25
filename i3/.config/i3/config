@@ -8,7 +8,7 @@ set $mod Mod1
 
 # set some variables e.g. 'set $WS1 1:terminal'
 # TODO: use ttf-font-awesome
-set $WS1  1:comms
+set $WS1  1:Comms
 set $WS2  2:tmp2
 set $WS3  3:tmp3
 set $WS4  4:tmp4
@@ -217,7 +217,7 @@ for_window [class="Pinentry"] floating enable
 for_window [class="^feh$"] floating enable
 # open zoom in floting window
 #for_window [class="^zoom$"] floating enable resize set 1024 768
-floating_maximum_size 1024 x 768
+floating_maximum_size 1600 x 1200
 
 # TODO: limit popup window dimensions
 for_window [window_role="pop-up"] floating enable

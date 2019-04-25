@@ -225,7 +225,7 @@ o() {
 # `less` with options to preserve color and line numbers, unless the output is
 # small enough for one screen.
 tre() {
-	tree -aC -I '.git|venv|*.un~' --dirsfirst "$@" | less -FRNX
+	tree -aC -I '.git|venv|*.un~|.terraform' --dirsfirst "$@" | less -FRNX
 }
 
 # Call from a local repo to open the repository on github/bitbucket in browser
@@ -494,7 +494,7 @@ function self_signed_cert() {
 
 update_rax ()
 {
-    cd ~/github/rax-brazil/CloudFormations/ && git pull && gl;
+    cd ~/github/rackerlabs/CloudFormations/ && git pull && gl;
     cd -
 }
 
@@ -522,6 +522,16 @@ function rretain_check() {
 function sft_connect() {
   sft ssh --via fran1898@pbast.lon3.corp.rackspace.net --via i-$1 i-$2
 }
+
+function get_defaults() {
+  #local config_file=$(basename ${1//template/yaml})
+  local config_file=$(sed -E 's/(^|_)([a-z0-9])/\U\2/g' <<< $(basename $1))
+  echo -e "template_path: \"${1//config/templates}\"\nparameters:\n\n#default parameters" > ${config_file//template/yaml}
+  ccat --bg=dark $1 | jq '.Parameters |
+    [(keys - ["data"])[] as $key |
+    { ($key): .[$key].Default}] | add' | sed -e 's/^[{}]//g' -e 's/":/:/' -e 's/  "/  /' -e 's/,$//' -e 's/null/MANDATORY/' -e '/^$/d' -e 's/^  /  #/' >> ${config_file//template/yaml}
+}
+
 #function workon() {
 #    local answer=
 #    local project=$1
