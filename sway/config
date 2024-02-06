@@ -10,13 +10,13 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term alacritty
 # Background images
-set $bgi1 /usr/share/backgrounds/sway/ryan-gosling-drive-movie.jpg
-set $bgi2 /usr/share/backgrounds/sway/EndCredits2560x1600-16bit.png
-set $bgi3 /usr/share/backgrounds/sway/tron.jpg
-set $bgi4 /usr/share/backgrounds/sway/view-nature-landscape-with-forest.jpg
-set $bgi5 /usr/share/backgrounds/sway/deskmat_forest.jpg
+#set $bgi1 /usr/share/backgrounds/sway/ryan-gosling-drive-movie.jpg
+#set $bgi2 /usr/share/backgrounds/sway/EndCredits2560x1600-16bit.png
+#set $bgi3 /usr/share/backgrounds/sway/tron.jpg
+set $bgi4 /usr/share/backgrounds/sway/forest.jpg
+#set $bgi5 /usr/share/backgrounds/sway/forest.jpg
 # EndCredits bg image
 set $locker swaylock -ekl -s fill --font Hack --font-size 12 --image $bgi4
 # Your preferred application launcher
@@ -210,6 +210,12 @@ input type:keyboard {
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+#
+# Special keys
+#
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 #
 # Resizing containers:
 #
