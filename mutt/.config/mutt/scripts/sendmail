@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-#/$HOME/.local/bin/MIMEmbellish | msmtp -a "$ACCOUNT" --passwordeval "pass gmail/smtp_pass" "$@"
-MIMEmbellish | msmtp -a "gmail" "$@"
